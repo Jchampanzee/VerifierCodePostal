@@ -1,0 +1,57 @@
+
+public class VerifCodePostal {
+	
+	public static void main (String[] args) {
+		System.out.println(verifierCodePostal("h2g 2K9"));
+		System.out.println(verifierCodePostal("H2G22K9"));
+		System.out.println(verifierCodePostal("H2G 2K99"));
+		System.out.println(verifierCodePostal("H2G 2K"));
+		System.out.println(verifierCodePostal("H2G  K9"));
+		System.out.println(verifierCodePostal("222 222"));
+		System.out.println(verifierCodePostal("HHH HHH"));
+		
+	}
+	
+	public static boolean verifierCodePostal (String codePostal) {
+		
+		boolean verif = true;
+		int longueur = codePostal.length();
+		
+		codePostal = codePostal.trim();
+		codePostal = codePostal.toUpperCase();
+		
+		if (longueur != 7) {
+			verif = false;
+			
+		} else {
+			for (int i = 0; i < longueur; i++) {
+				
+				char caractere = codePostal.charAt(i);
+				
+				if (i == 0 || i == 2 || i == 5) {
+					if (caractere < 'A' || caractere > 'Z') {
+						verif = false;
+						i = longueur;
+					}
+				}
+				
+				if (i == 3) {
+					if (caractere != ' ') {
+						verif = false;
+						i = longueur;
+					}
+				}
+				
+				if (i == 1 || i == 4 || i == 6) {
+					if (caractere < '0' || caractere > '9') {
+						verif = false;
+						i = longueur;
+					}
+				}
+			}
+		}
+		
+		return verif;
+	}
+
+}
